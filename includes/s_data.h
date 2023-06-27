@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_infile.c                                      :+:      :+:    :+:   */
+/*   s_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 22:51:53 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 18:31:11 by bena             ###   ########.fr       */
+/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
+/*   Updated: 2023/06/27 20:03:58 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
+#ifndef S_DATA_H
+# define S_DATA_H
 
-int	open_infile(int *fd, char *path)
+typedef struct s_data
 {
-	if (access(path, F_OK | R_OK))
-		return (-1);
-	*fd = open(path, O_RDONLY);
-	if (*fd == -1)
-		return (-1);
-	return (0);
-}
+	int	infile;
+	int	outfile;
+	int	(*pipe)[2];
+	int	number_of_cmds;
+}	t_data;
+#endif

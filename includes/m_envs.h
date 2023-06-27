@@ -1,23 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_infile.c                                      :+:      :+:    :+:   */
+/*   m_envs.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 22:51:53 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 18:31:11 by bena             ###   ########.fr       */
+/*   Created: 2023/06/27 18:37:49 by bena              #+#    #+#             */
+/*   Updated: 2023/06/27 18:44:27 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
+#ifndef M_ENVS_H
+# define M_ENVS_H
 
-int	open_infile(int *fd, char *path)
-{
-	if (access(path, F_OK | R_OK))
-		return (-1);
-	*fd = open(path, O_RDONLY);
-	if (*fd == -1)
-		return (-1);
-	return (0);
-}
+# define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+#endif

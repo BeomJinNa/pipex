@@ -6,16 +6,18 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:38:49 by bena              #+#    #+#             */
-/*   Updated: 2023/06/26 23:31:17 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/27 20:51:31 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include "libft.h"
+#include "s_data.h"
+#include "fileio.h"
+#include "pipe.h"
+#include "closes.h"
 
-int			open_infile(int *fd, char **av);
-int			get_through_pipe(int *infile, char **av, int number_of_exec);
 static int	pipex(int ac, char **av);
 static int	pipex_bonus(int ac, char **av);
 static int	return_error(void);
@@ -33,16 +35,21 @@ int	main(int ac, char **av)
 
 static int	pipex(int ac, char **av)
 {
-	int	infile;
+	t_data	data;
 
-	if (open_infile(&infile, av))
+	data.number_of_cmds = ac - 3;
+	if (open_infile(&data.infile, av[1]))
 		return (-1);
-	if (get_through_pipe(&infile, &av[1], ac - 3))
-	{
-		close(infile);
-		return (-1);
-	}
-	close(infile);
+	if (open_outfile(&data.outfile, av[ac - 1]))
+		return (close_one(data.infile));
+	data.pipe = create_pipes(data.number_of_cmds - 1);
+	if (data.pipe == NULL)
+		return (close_two(data.infile, data.outfile));
+	alloc_process(&data);
+	wait_child_processes(&data);
+	remove_pipes(pipe);
+	close(data.infile);
+	close(data.outfile);
 	return (0);
 }
 

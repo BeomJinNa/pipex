@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_infile.c                                      :+:      :+:    :+:   */
+/*   create_pipes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 22:51:53 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 18:31:11 by bena             ###   ########.fr       */
+/*   Created: 2023/06/27 20:19:29 by bena              #+#    #+#             */
+/*   Updated: 2023/06/27 20:39:01 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-int	open_infile(int *fd, char *path)
+int	(*create_pipes(int number_of_pipes))[2]
 {
-	if (access(path, F_OK | R_OK))
-		return (-1);
-	*fd = open(path, O_RDONLY);
-	if (*fd == -1)
-		return (-1);
-	return (0);
+	int	(*output)[2];
+	int	i;
+
+	output = (int (*)[2])malloc(sizeof(int [2]) * number_of_pipes);
+	if (output == NULL)
+		return (NULL);
 }

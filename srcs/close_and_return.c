@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_infile.c                                      :+:      :+:    :+:   */
+/*   close_and_return.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 22:51:53 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 18:31:11 by bena             ###   ########.fr       */
+/*   Created: 2023/06/27 20:40:19 by bena              #+#    #+#             */
+/*   Updated: 2023/06/27 20:49:10 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
+#include <unistd.h>
 
-int	open_infile(int *fd, char *path)
+int	close_one(int infile)
 {
-	if (access(path, F_OK | R_OK))
-		return (-1);
-	*fd = open(path, O_RDONLY);
-	if (*fd == -1)
-		return (-1);
-	return (0);
+	close(infile);
+	return (-1);
+}
+
+int	close_two(int infile, int outfile)
+{
+	close(infile);
+	close(outfile);
+	return (-1);
 }
