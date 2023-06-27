@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:38:49 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 20:51:31 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/27 21:03:49 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	pipex(int ac, char **av)
 		return (close_two(data.infile, data.outfile));
 	alloc_process(&data);
 	wait_child_processes(&data);
-	remove_pipes(pipe);
+	remove_pipes(data.pipe, number_of_cmds);
 	close(data.infile);
 	close(data.outfile);
 	return (0);
