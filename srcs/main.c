@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:38:49 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 21:03:49 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/27 23:50:20 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static int	pipex(int ac, char **av)
 	t_data	data;
 
 	data.number_of_cmds = ac - 3;
+	data.cmds = &av[2];
+	data.path = NULL
+	data.pid = (pit_t *)malloc(sizeof(pid_t) * data.number_of_cmds);
+	if (data.pid == NULL)
+		return (-1);
 	if (open_infile(&data.infile, av[1]))
 		return (-1);
 	if (open_outfile(&data.outfile, av[ac - 1]))
@@ -45,11 +50,13 @@ static int	pipex(int ac, char **av)
 	data.pipe = create_pipes(data.number_of_cmds - 1);
 	if (data.pipe == NULL)
 		return (close_two(data.infile, data.outfile));
-	alloc_process(&data);
+	if (alloc_process(&data))
+		return (close_all(&data));
 	wait_child_processes(&data);
 	remove_pipes(data.pipe, number_of_cmds);
 	close(data.infile);
 	close(data.outfile);
+	free(data.pid);
 	return (0);
 }
 
