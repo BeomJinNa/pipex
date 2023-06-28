@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:01:08 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:50:27 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/28 19:42:33 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 char	*get_path(char **ep)
 {
-	char	*ptr;
+	char	**ptr;
 
-	ptr = *ep;
-	while (ptr != NULL)
+	ptr = ep;
+	while (*ptr != NULL)
 	{
-		if (ft_strncmp(ptr, "PATH=", 5) == 0)
-			return (ptr);
+		if (ft_strncmp(*ptr, "PATH=", 5) == 0)
+			return (*ptr);
 		ptr++;
 	}
 	write(2, "The PATH environment variable could not be found.\n", 50);

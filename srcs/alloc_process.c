@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 18:45:34 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:45:42 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/28 23:54:03 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	alloc_process(t_data *data)
 	{
 		data->pid[i] = run_process(data, i);
 		if (data->pid[i] == -1)
-			return (-1); i++;
+			return (-1);
+		i++;
 	}
 	return (0);
 }
@@ -37,6 +38,7 @@ static int	run_process(t_data *data, int index)
 {
 	char	*path;
 	pid_t	pid;
+	char	*cmd[2];
 
 	pid = fork();
 	if (pid < 0)
@@ -47,7 +49,9 @@ static int	run_process(t_data *data, int index)
 	path = get_excutable_path(data->path, data->cmds[index]);
 	if (path == NULL)
 		terminate_current_process(data, index);
-	execve(path, &data->cmds[index], data->ep);
+	cmd[0] = data->cmds[index];
+	cmd[1] = NULL;
+	execve(path, cmd, data->ep);
 	free(path);
 	terminate_current_process(data, index);
 	return (0);
@@ -77,6 +81,7 @@ static void	init_process(t_data *data, int index)
 			close(data->infile);
 		if (index != data->number_of_cmds - 1)
 			close(data->outfile);
+		i++;
 	}
 }
 
