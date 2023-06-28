@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   flags.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2023/02/02 16:05:16 by bena              #+#    #+#             */
+/*   Updated: 2023/04/29 04:43:32 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
+#ifndef FLAGS_H
+# define FLAGS_H
 
-# include <unistd.h>
+# define F_NO_SIGN 0
+# define F_SIGN_SPACE 1
+# define F_SIGN_PLUS 2
+# define F_NO_PADDING 0
+# define F_ZERO_PADDING 1
+# define F_ZERO_PRECISION 2
 
-typedef struct s_data
+typedef struct s_flags
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
+	char	left_align;
+	char	zero_padding;
+	char	sign;
+	char	base_visible;
+	size_t	width;
+	size_t	precision;
+}			t_flags;
 #endif

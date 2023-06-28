@@ -6,13 +6,15 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 18:45:34 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 15:35:11 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/28 17:45:42 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "s_data.h"
 
+char		*get_excutable_path(char *path, char *command);
 static int	run_process(t_data *data, int index);
 static void	init_process(t_data *data, int index);
 static void	terminate_current_process(t_data *data, int index);
@@ -20,15 +22,13 @@ static void	terminate_current_process(t_data *data, int index);
 int	alloc_process(t_data *data)
 {
 	int		i;
-	pid_t	pid;
 
 	i = 0;
 	while (i < data->number_of_cmds)
 	{
 		data->pid[i] = run_process(data, i);
 		if (data->pid[i] == -1)
-			return (-1);
-		i++;
+			return (-1); i++;
 	}
 	return (0);
 }
@@ -36,10 +36,10 @@ int	alloc_process(t_data *data)
 static int	run_process(t_data *data, int index)
 {
 	char	*path;
-//	if (access("cmd", F_OK | X_OK))
-//		return (-1);
-	*pid = fork(void);
-	if (*pid < 0)
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
 		return (-1);
 	if (pid > 0)
 		return (pid);
@@ -47,9 +47,10 @@ static int	run_process(t_data *data, int index)
 	path = get_excutable_path(data->path, data->cmds[index]);
 	if (path == NULL)
 		terminate_current_process(data, index);
-//	execve(path, cmd, envp);
+	execve(path, &data->cmds[index], data->ep);
 	free(path);
 	terminate_current_process(data, index);
+	return (0);
 }
 
 static void	init_process(t_data *data, int index)

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2022/11/18 20:38:14 by bena              #+#    #+#             */
+/*   Updated: 2022/11/22 20:34:14 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
+#include <stdlib.h>
 
-# include <unistd.h>
-
-typedef struct s_data
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
-#endif
+	unsigned char	ch;
+	unsigned char	*st;
+
+	ch = c;
+	st = (unsigned char *)s;
+	while (n--)
+		if (*st++ == ch)
+			return (--st);
+	return (0);
+}

@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   s_list.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2023/04/29 04:25:35 by bena              #+#    #+#             */
+/*   Updated: 2023/04/29 04:25:54 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
+#ifndef S_LIST_H
+# define S_LIST_H
 
-# include <unistd.h>
-
-typedef struct s_data
+typedef struct s_list
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
+	void			*content;
+	struct s_list	*next;
+}					t_list;
 #endif

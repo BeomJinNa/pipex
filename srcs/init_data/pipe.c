@@ -6,12 +6,14 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:19:29 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 22:04:53 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/28 17:55:39 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+
+int	(*remove_pipes(int (*pipe)[2], int index))[2];
 
 int	(*create_pipes(int number_of_pipes))[2]
 {
@@ -28,17 +30,17 @@ int	(*create_pipes(int number_of_pipes))[2]
 	return (output);
 }
 
-int	remove_pipes(int (*pipe)[2], int index)
+int	(*remove_pipes(int (*pipe)[2], int index))[2]
 {
 	int	i;
 
 	i = 0;
 	while (i < index)
 	{
-		close(pipe[0]);
-		close(pipe[1]);
+		close(pipe[i][0]);
+		close(pipe[i][1]);
 		i++;
 	}
 	free(pipe);
-	return (-1);
+	return (NULL);
 }

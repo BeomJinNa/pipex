@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2022/11/18 19:58:24 by bena              #+#    #+#             */
+/*   Updated: 2022/11/22 20:37:24 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
-
-# include <unistd.h>
-
-typedef struct s_data
+char	*ft_strchr(const char *s, int c)
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
-#endif
+	char	ch;
+
+	ch = c;
+	while (*s)
+		if (*s++ == ch)
+			return ((char *)--s);
+	if (ch == 0)
+		return ((char *)s);
+	return (0);
+}

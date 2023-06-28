@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:01:08 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 14:16:11 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/28 17:50:27 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_path(char **ep)
 	ptr = *ep;
 	while (ptr != NULL)
 	{
-		if (strncmp(ptr, "PATH=", 5) == 0)
+		if (ft_strncmp(ptr, "PATH=", 5) == 0)
 			return (ptr);
 		ptr++;
 	}

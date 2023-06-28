@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2022/08/30 15:37:09 by bena              #+#    #+#             */
+/*   Updated: 2022/11/21 20:18:52 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
+#include <stdlib.h>
 
-# include <unistd.h>
-
-typedef struct s_data
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
-#endif
+	unsigned char	*c1;
+	unsigned char	*c2;
+
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	while (n)
+	{
+		if (*c1 != *c2)
+			return (*c1 - *c2);
+		if (*c1 == 0)
+			return (0);
+		c1++;
+		c2++;
+		n--;
+	}
+	return (0);
+}

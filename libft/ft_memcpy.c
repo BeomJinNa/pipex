@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2022/11/18 14:58:43 by bena              #+#    #+#             */
+/*   Updated: 2022/11/27 14:07:58 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
+#include <stdlib.h>
 
-# include <unistd.h>
-
-typedef struct s_data
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
-#endif
+	unsigned char	*address_src;
+	unsigned char	*address_dst;
+
+	if (dst == 0 && src == 0)
+		return (0);
+	address_src = (unsigned char *)src;
+	address_dst = (unsigned char *)dst;
+	while (n--)
+		*address_dst++ = *address_src++;
+	return (dst);
+}

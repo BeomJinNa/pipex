@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2022/11/14 19:31:33 by bena              #+#    #+#             */
+/*   Updated: 2022/11/27 14:06:58 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
+#include <stdlib.h>
 
-# include <unistd.h>
-
-typedef struct s_data
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
-#endif
+	unsigned char	*address;
+	unsigned char	value;
+
+	value = (unsigned char)c;
+	address = (unsigned char *)b;
+	while (len--)
+		*address++ = value;
+	return (b);
+}

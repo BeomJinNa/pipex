@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2023/02/23 10:17:46 by bena              #+#    #+#             */
+/*   Updated: 2023/03/27 01:25:27 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
+# include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_data
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4096
+# endif
+
+typedef struct s_buf
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
+	char			is_this_dynamic;
+	char			*buf;
+	char			*buf_end;
+	char			*scanner;
+	ssize_t			read_bytes;
+	int				buf_size;
+	int				fd;
+	struct s_buf	*next;
+	struct s_buf	*before;
+}					t_buf;
+
+char			*get_next_line(int fd);
 #endif

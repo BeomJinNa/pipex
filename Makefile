@@ -24,12 +24,21 @@ LIBFT_B	= libft_bonus/libft_bonus.a
 
 #sources=======================================================================
 
-SRCS	= #source files(*.c)
+SRCS	= srcs/main.c \
+		  srcs/alloc_process.c \
+		  srcs/alloc_process/get_excutable_path.c \
+		  srcs/init_data.c \
+		  srcs/init_data/clean.c \
+		  srcs/init_data/get_path.c \
+		  srcs/init_data/open_infile.c \
+		  srcs/init_data/open_outfile.c \
+		  srcs/init_data/pipe.c \
+		  srcs/wait_child_processes.c
 
 B_SRCS	= #bonus source files(*.c)
 
-OBJS	= $(S_SRCS:.c=.o)
-B_OBJS	= $(SB_SRCS:.c=.o)
+OBJS	= $(SRCS:.c=.o)
+B_OBJS	= $(B_SRCS:.c=.o)
 
 
 

@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:01:01 by bena             ###   ########.fr       */
+/*   Created: 2022/09/05 21:17:32 by bena              #+#    #+#             */
+/*   Updated: 2023/03/16 09:57:15 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
-
-# include <unistd.h>
-
-typedef struct s_data
+static int	ft_isspace(int c)
 {
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
-#endif
+	return (c == 32 || (9 <= c && c <= 13));
+}
+
+int	ft_atoi(const char *str)
+{
+	int	sign;
+	int	output;
+
+	while (ft_isspace(*str))
+		str++;
+	sign = 1;
+	if (*str == '+' || *str == '-')
+		if (*str++ == '-')
+			sign = -1;
+	output = 0;
+	while ('0' <= *str && *str <= '9')
+	{
+		output = output * 10 + *str - '0';
+		str++;
+	}
+	return (sign * output);
+}

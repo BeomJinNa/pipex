@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 12:20:07 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 13:02:13 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/28 17:48:19 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include <unistd.h>
 #include "fileio.h"
 #include "clean.h"
+#include "pipe.h"
+
+char	*get_path(char **ep);
 
 int	init_pipex(t_data *data, int ac, char **av, char **ep)
 {
@@ -23,7 +26,7 @@ int	init_pipex(t_data *data, int ac, char **av, char **ep)
 	data->path = get_path(ep);
 	if (data->path == NULL)
 		return (-1);
-	data->pid = (pit_t *)malloc(sizeof(pid_t) * data->number_of_cmds);
+	data->pid = (pid_t *)malloc(sizeof(pid_t) * data->number_of_cmds);
 	if (data->pid == NULL)
 		return (clean_malloc(data));
 	if (open_infile(&data->infile, av[1]))

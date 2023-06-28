@@ -6,13 +6,13 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:05:25 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 21:03:33 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/28 17:54:18 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPE_H
 # define PIPE_H
 
-int	(*create_pipes(int number_of_pipes))([2]);
-int	remove_pipes(int (*pipe)[2], int index);
+int	(*create_pipes(int number_of_pipes))[2];
+int	(*remove_pipes(int (*pipe)[2], int index))[2];
 #endif
