@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_and_return.c                                 :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 20:40:19 by bena              #+#    #+#             */
-/*   Updated: 2023/06/27 22:08:38 by bena             ###   ########.fr       */
+/*   Created: 2023/06/28 13:01:08 by bena              #+#    #+#             */
+/*   Updated: 2023/06/28 14:16:11 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 #include "s_data.h"
 
-int	clean_pid_and_infile(t_data *data)
+char	*get_path(char **ep)
 {
-	free(data.pid);
-	close(infile);
-	return (-1);
-}
+	char	*ptr;
 
-int	clean_pid_and_inout(t_data *data)
-{
-	free(data.pid);
-	close(infile);
-	close(outfile);
-	return (-1);
-}
-
-int	clean_all(t_data *data)
-{
-	int	i;
-
-	free(data.pid);
-	close(data->infile);
-	close(data->outfile);
-	i = 0;
-	while (i < data->number_of_cmds)
+	ptr = *ep;
+	while (ptr != NULL)
 	{
-		close(data->pipe[i][0]);
-		close(data->pipe[i][1]);
-		i++;
+		if (strncmp(ptr, "PATH=", 5) == 0)
+			return (ptr);
+		ptr++;
 	}
-	return (-1);
+	write(2, "The PATH environment variable could not be found.\n", 50);
+	return (NULL);
 }

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_data.h                                           :+:      :+:    :+:   */
+/*   clean.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 12:17:53 by bena             ###   ########.fr       */
+/*   Created: 2023/06/27 20:42:23 by bena              #+#    #+#             */
+/*   Updated: 2023/06/28 12:36:28 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_DATA_H
-# define S_DATA_H
+#ifndef CLEAN_H
+# define CLEAN_H
 
-#include <unistd.h>
+# include "s_data.h"
 
-typedef struct s_data
-{
-	int		infile;
-	int		outfile;
-	int		(*pipe)[2];
-	int		number_of_cmds;
-	char	*path;
-	char	**cmds;
-	char	**ep;
-	pid_t	*pid;
-}			t_data;
+int	clean_malloc(t_data *data);
+int	clean_mallocs(t_data *data);
+int	clean_infile(t_data *data);
+int	clean_inout(t_data *data);
+int	clean_all(t_data *data);
 #endif
