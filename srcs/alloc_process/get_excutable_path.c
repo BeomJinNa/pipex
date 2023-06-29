@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:43:54 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:46:42 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/29 14:35:47 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 
 static char	*remove_matrix(char **matrix);
+static char	*get_joined_path(char *str, char *suffix);
 
 char	*get_excutable_path(char *path, char *command)
 {
@@ -27,13 +28,11 @@ char	*get_excutable_path(char *path, char *command)
 	ptr = path_arr;
 	while (*ptr != NULL)
 	{
-		output = ft_strjoin(*ptr, command);
+		output = get_joined_path(*ptr, command);
 		if (output == NULL)
 			return (remove_matrix(path_arr));
-		if (access(*ptr, F_OK | X_OK) == 0)
+		if (access(output, F_OK | X_OK) == 0)
 		{
-			free(output);
-			output = ft_strdup(*ptr);
 			remove_matrix(path_arr);
 			return (output);
 		}
@@ -57,4 +56,24 @@ static char	*remove_matrix(char **matrix)
 		free(matrix);
 	}
 	return (NULL);
+}
+
+static char	*get_joined_path(char *str, char *suffix)
+{
+	char	*output;
+	char	*temp;
+
+	temp = NULL;
+	if (str[ft_strlen(str) - 1] != '/')
+	{
+		temp = ft_strjoin(str, "/");
+		if (temp == NULL)
+			return (NULL);
+		output = ft_strjoin(temp, suffix);
+	}
+	else
+		output = ft_strjoin(str, suffix);
+	if (temp != NULL)
+		free (temp);
+	return (output);
 }

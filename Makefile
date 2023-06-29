@@ -33,6 +33,8 @@ SRCS	= srcs/main.c \
 		  srcs/init_data/open_infile.c \
 		  srcs/init_data/open_outfile.c \
 		  srcs/init_data/pipe.c \
+		  srcs/init_data/read_args.c \
+		  srcs/init_data/remove_array.c \
 		  srcs/wait_child_processes.c
 
 B_SRCS	= #bonus source files(*.c)

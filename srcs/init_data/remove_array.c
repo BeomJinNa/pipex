@@ -1,45 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   remove_array.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 20:19:29 by bena              #+#    #+#             */
-/*   Updated: 2023/06/29 13:26:35 by bena             ###   ########.fr       */
+/*   Created: 2023/06/29 17:12:19 by bena              #+#    #+#             */
+/*   Updated: 2023/06/29 17:12:50 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include "pipe.h"
 
-t_pipe	*create_pipes(int number_of_pipes)
+char	**remove_matrix(char **array)
 {
-	int	(*output)[2];
-	int	i;
+	char	**ptr;
 
-	output = (t_pipe *)malloc(sizeof(t_pipe) * number_of_pipes);
-	if (output == NULL)
+	if (array == NULL)
 		return (NULL);
-	i = -1;
-	while (++i < number_of_pipes)
-		if (pipe(output[i]))
-			return (remove_pipes(output, i));
-	return (output);
+	ptr = array;
+	while (*ptr != NULL)
+	{
+		free(*ptr);
+		ptr++;
+	}
+	free(array);
+	return (NULL);
 }
 
-t_pipe	*remove_pipes(t_pipe *pipe, int index)
+char	***remove_tensor(char ***array)
 {
-	int	i;
+	char	***ptr;
+	char	**ptr_sub;
 
-	i = 0;
-	while (i < index)
+	if (array == NULL)
+		return (NULL);
+	ptr = array;
+	while (*ptr != NULL)
 	{
-		close(pipe[i][0]);
-		close(pipe[i][1]);
-		i++;
+		ptr_sub = *ptr;
+		while (*ptr_sub != NULL)
+		{
+			free(*ptr_sub);
+			ptr_sub++;
+		}
+		ptr++;
 	}
-	free(pipe);
+	free(array);
 	return (NULL);
 }

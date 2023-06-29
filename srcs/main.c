@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:38:49 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 23:40:27 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/29 14:50:35 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		wait_child_processes(t_data *data);
 static int	pipex(int ac, char **av, char **ep);
 static int	pipex_bonus(int ac, char **av, char **ep);
 static int	return_error(void);
-static void	print_usage(void);
+static int	print_usage(void);
 
 int	main(int ac, char **av, char **ep)
 {
@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **ep)
 				if (pipex(ac, av, ep))
 					return (return_error());
 			if (ac < 5)
-				print_usage();
+				return (print_usage());
 		}
 		else
 		{
@@ -42,11 +42,11 @@ int	main(int ac, char **av, char **ep)
 				if (pipex_bonus(ac, av, ep))
 					return (return_error());
 			if (ac < 6)
-				print_usage();
+				return (print_usage());
 		}
 	}
 	else
-		print_usage();
+		return (print_usage());
 	return (0);
 }
 
@@ -58,10 +58,10 @@ static int	pipex(int ac, char **av, char **ep)
 		return (-1);
 	if (alloc_process(&data))
 		return (clean_all(&data));
-	wait_child_processes(&data);
 	remove_pipes(data.pipe, data.number_of_cmds);
 	close(data.infile);
 	close(data.outfile);
+	wait_child_processes(&data);
 	free(data.pid);
 	return (0);
 }
@@ -77,15 +77,16 @@ static int	pipex_bonus(int ac, char **av, char **ep)
 static int	return_error(void)
 {
 	perror("Error");
-	return (-1);
+	return (1);
 }
 
-static void	print_usage(void)
+static int	print_usage(void)
 {
-	ft_printf("Usage: ./pipex %s %s %s %s %s\n",
-		"{<infile> or \"here_doc\" LIMITER}",
-		"<command1>",
-		"<command2>",
-		"...",
-		"<outfile>");
+	ft_putstr_fd("Usage: ./pipex ", 2);
+	ft_putstr_fd("{<infile> or \"here_doc\" LIMITER}", 2);
+	ft_putstr_fd("<command1>", 2);
+	ft_putstr_fd("<command2>", 2);
+	ft_putstr_fd("...", 2);
+	ft_putstr_fd("<outfile>\n", 2);
+	return (1);
 }
