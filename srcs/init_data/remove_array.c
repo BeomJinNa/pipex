@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 17:12:19 by bena              #+#    #+#             */
-/*   Updated: 2023/06/29 17:12:50 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/29 19:18:25 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	***remove_tensor(char ***array)
 			free(*ptr_sub);
 			ptr_sub++;
 		}
+		free(*ptr);
 		ptr++;
 	}
 	free(array);

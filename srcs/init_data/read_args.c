@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:41:12 by bena              #+#    #+#             */
-/*   Updated: 2023/06/29 18:46:46 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/29 19:54:03 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,9 @@ static int	push_to_the_next_token(const char **str)
 	ptr = *str;
 	while (*ptr)
 	{
-		while (*ptr == '\\' && *(ptr + 1))
-			ptr += 2;
-		if (*ptr == '\'')
+		if (*ptr == '\'' && in_double_brace == 0)
 			in_brace ^= 1;
-		else if (*ptr == '\"')
+		else if (*ptr == '\"' && in_brace == 0)
 			in_double_brace ^= 1;
 		if (in_brace == 0 && in_double_brace == 0 && *ptr == ' ')
 			break ;
