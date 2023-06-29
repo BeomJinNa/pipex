@@ -6,21 +6,20 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:19:29 by bena              #+#    #+#             */
-/*   Updated: 2023/06/28 17:55:39 by bena             ###   ########.fr       */
+/*   Updated: 2023/06/29 11:22:40 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "pipe.h"
 
-int	(*remove_pipes(int (*pipe)[2], int index))[2];
-
-int	(*create_pipes(int number_of_pipes))[2]
+t_pipe	*create_pipes(int number_of_pipes)
 {
 	int	(*output)[2];
 	int	i;
 
-	output = (int (*)[2])malloc(sizeof(int [2]) * number_of_pipes);
+	output = (t_pipe *)malloc(sizeof(t_pipe) * number_of_pipes);
 	if (output == NULL)
 		return (NULL);
 	i = -1;
@@ -30,7 +29,7 @@ int	(*create_pipes(int number_of_pipes))[2]
 	return (output);
 }
 
-int	(*remove_pipes(int (*pipe)[2], int index))[2]
+t_pipe	*remove_pipes(t_pipe *pipe, int index)
 {
 	int	i;
 

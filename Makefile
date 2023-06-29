@@ -73,9 +73,9 @@ $(LIBFT_B) :
 
 
 
-.PHONY: bonus
-bonus :
-	make BONUS=0 $(NAME)
+ #.PHONY: bonus
+ #bonus :
+ #	make BONUS=0 $(NAME)
 
 #const options=================================================================
 
