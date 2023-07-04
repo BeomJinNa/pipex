@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 18:51:22 by bena              #+#    #+#             */
-/*   Updated: 2023/06/29 18:34:42 by bena             ###   ########.fr       */
+/*   Updated: 2023/07/04 11:05:32 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_data
 	int		(*pipe)[2];
 	int		number_of_cmds;
 	int		number_of_pipes;
+	int		heredoc;
 	char	*path;
 	char	***cmds;
 	char	**ep;

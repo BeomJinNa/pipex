@@ -27,6 +27,8 @@ LIBFT_B	= libft_bonus/libft_bonus.a
 SRCS	= srcs/main.c \
 		  srcs/alloc_process.c \
 		  srcs/alloc_process/get_excutable_path.c \
+		  srcs/convert_argv_to_have_heredoc.c \
+		  srcs/here_doc.c \
 		  srcs/init_data.c \
 		  srcs/init_data/clean.c \
 		  srcs/init_data/get_path.c \
