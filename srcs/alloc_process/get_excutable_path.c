@@ -6,7 +6,7 @@
 /*   By: bena <bena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:43:54 by bena              #+#    #+#             */
-/*   Updated: 2023/06/29 14:35:47 by bena             ###   ########.fr       */
+/*   Updated: 2023/07/04 09:08:05 by bena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static char	*remove_matrix(char **matrix);
 static char	*get_joined_path(char *str, char *suffix);
+static int	check_current_path_available(char **buffer, char *command);
 
 char	*get_excutable_path(char *path, char *command)
 {
@@ -22,6 +23,8 @@ char	*get_excutable_path(char *path, char *command)
 	char	**ptr;
 	char	*output;
 
+	if (check_current_path_available(&output, command))
+		return (output);
 	path_arr = ft_split(path + 5, ':');
 	if (path_arr == NULL)
 		return (NULL);
@@ -36,6 +39,7 @@ char	*get_excutable_path(char *path, char *command)
 			remove_matrix(path_arr);
 			return (output);
 		}
+		free(output);
 		ptr++;
 	}
 	return (remove_matrix(path_arr));
@@ -76,4 +80,17 @@ static char	*get_joined_path(char *str, char *suffix)
 	if (temp != NULL)
 		free (temp);
 	return (output);
+}
+
+static int	check_current_path_available(char **buffer, char *command)
+{
+	if (buffer == NULL)
+		return (0);
+	*buffer = get_joined_path("./", command);
+	if (*buffer != NULL && access(*buffer, F_OK | X_OK) == 0)
+		return (1);
+	if (*buffer != NULL)
+		free(*buffer);
+	*buffer = NULL;
+	return (0);
 }
